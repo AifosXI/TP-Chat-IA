@@ -6,3 +6,6 @@ Il faut ajouter sa clef API dans le `.env.local` qui est situé dans le dossier 
 
 Il faut la mettre sous cette forme :
 
+```.dotenv
+REPLICATE_API_TOKEN=<your-token-here>
+```
