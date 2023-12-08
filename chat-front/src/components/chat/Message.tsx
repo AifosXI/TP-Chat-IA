@@ -1,3 +1,5 @@
+import TranslateMessage from "@/components/chat/TranslateMessage";
+
 export interface IMessage {
     username: string;
     content: string;
@@ -7,9 +9,10 @@ export interface IMessage {
 interface Props {
     message: IMessage;
     isMe: boolean;
+    language: string;
 }
 
-const Message = ({ message, isMe }: Props) => {
+const Message = ({ message, isMe, language }: Props) => {
     return (
         <div className={`w-fit ${isMe ? "ml-auto" : ""}`}>
             <p className={"text-sm mt-4 first:mt-0"}>{message.username}</p>
@@ -17,6 +20,7 @@ const Message = ({ message, isMe }: Props) => {
                 <p className={"text-lg"}>{message.content}</p>
                 <p className={"text-sm italic"}>{message.timeSent}</p>
             </div>
+            <TranslateMessage message={message.content} language={language}/>
         </div>
 
     );
