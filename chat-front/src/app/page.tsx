@@ -6,16 +6,16 @@ import SendMessage from "@/components/chat/SendMessage";
 import Messages from "@/components/chat/Messages";
 import SendUsername from "@/components/chat/SendUsername";
 import SetLanguage from "@/components/chat/SetLanguage";
-import message from "@/components/chat/Message";
+import GenerateTwoResponse from "@/components/chat/GenerateTwoResponse";
 
 const socket = io("http://localhost:3000");
-const sleep = (ms: any) => new Promise((r) => setTimeout(r, ms));
 
 export default function Home() {
 
   const [messages, setMessages] = useState([]);
   const [username, setUsername] = useState("");
   const [language, setLanguage] = useState("");
+  const [lastMessage, setLastMessage] = useState("");
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -30,6 +30,13 @@ export default function Home() {
       setMessages((msg) => [msg, ...data] as any);
     });
 
+    socket.on("send-last-message", (data) => {
+      if(data.username === username)
+      {
+      } else {
+        setLastMessage(data[0].content);
+      }
+    })
   }, []);
 
   return (
@@ -44,6 +51,7 @@ export default function Home() {
             <Messages messages={messages} username={username} language={language}/>
           </div>
 
+          <GenerateTwoResponse message={lastMessage} socket={socket} username={username}/>
           <SendMessage socket={socket} username={username}/>
 
           <div className={"w-full mt-4 flex flex-row items-center gap-x-4"}>

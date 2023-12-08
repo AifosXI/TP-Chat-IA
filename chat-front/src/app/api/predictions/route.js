@@ -11,7 +11,7 @@ async function handler(request, res) {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            version: "02e509c789964a7ea8736978a43525956ef40397be9033abf9fd2badfe68c9e3",
+            version: body.version ?? "13c3cdee13ee059ab779f0291d29054dab00a47dad8261375654de5540165fb0",
 
             input: {
                 prompt: body.prompt,

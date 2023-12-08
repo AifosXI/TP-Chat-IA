@@ -1,4 +1,3 @@
-import {IMessage} from "@/components/chat/Message";
 import React, {useState} from "react";
 
 interface Props {
@@ -26,6 +25,7 @@ const TranslateMessage = ({ message, language, className }: Props) => {
             },
             body: JSON.stringify({
                 prompt: `translate this in ${language} : ${message}`,
+                version: '7bf2629623162c0cf22ace9ec7a94b34045c1cfa2ed82586f05f3a60b1ca2da5',
             }),
         });
 
@@ -61,7 +61,7 @@ const TranslateMessage = ({ message, language, className }: Props) => {
 
     return (
         <>
-            {language !== "" &&
+            {language !== "" && predictionStatus !== "succeeded" &&
                 <form onSubmit={handleSubmit} className={`mt-1 text-sm text-blue-500 ${className}`}>
                     <button type={"submit"}>Translate</button>
                 </form>

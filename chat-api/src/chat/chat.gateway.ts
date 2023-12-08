@@ -40,7 +40,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
         ...payload,
       });
 
-      console.log('chatMessages', this.chatMessages);
+      client.emit('send-last-message', this.chatMessages.slice(-1));
     }
   }
 
@@ -67,7 +67,6 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
       username: '',
     });
     client.emit('send-old-messages', this.chatMessages);
-    console.log({ id: client.id });
   }
 
   handleDisconnect(client: any) {
