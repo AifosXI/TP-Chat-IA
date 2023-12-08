@@ -43,11 +43,11 @@ export default function Home() {
       <main className="flex min-h-screen flex-col items-center p-24 max-w-screen-xl mx-auto">
         <h1 className={"font-bold uppercase text-3xl"}> TP Chat Socket.io NestJS & NextJS </h1>
 
-        <div className={"flex flex-col items-center w-full mt-20"}>
+        <div className={"flex flex-col items-center w-full mt-5"}>
 
           <SendUsername socket={socket} setUsername={setUsername}/>
 
-          <div className={"flex flex-col bg-teal-900 p-4 w-full rounded-md"}>
+          <div className={"flex flex-col border border-white p-4 w-full rounded-md h-[450px]"}>
             <Messages messages={messages} username={username} language={language}/>
           </div>
 

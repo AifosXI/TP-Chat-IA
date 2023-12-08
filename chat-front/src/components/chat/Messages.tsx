@@ -8,13 +8,18 @@ interface Props {
 }
 
 const Messages = ({messages, username, language}: Props) => {
+    console.log(messages);
     return (
         <div>
-            {messages.length > 0 &&
+            {messages.length > 1 &&
                 messages.map((msg, key) => {
-                    return(
-                        <Message isMe={msg.username === username} key={msg.timeSent ?? key} message={msg} language={language}/>
-                    )
+                    if(key !== 0)
+                    {
+                        return(
+                            <Message isMe={msg.username === username} key={msg.timeSent ?? key} message={msg} language={language}/>
+                        )
+                    }
+
                 })
             }
             {messages.length === 0 && (<p className={"text-center"}>There is no messages yet, join to start a conversation.</p>)}

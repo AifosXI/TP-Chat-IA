@@ -38,7 +38,7 @@ const SendUsername = ({ socket, setUsername }: Props) => {
     return (
         <>
             <form onSubmit={handleSubmit} className={"flex flex-row justify-between gap-x-4 w-1/3 my-4"}>
-                <input type={"text"} className={`py-2 px-4 text-black rounded-2xl w-full ${exists ? "border-4 border-red-500" : ""}`} placeholder={"Username"} value={text} onChange={(e) => setText(e.target.value)}/>
+                <input type={"text"} className={`py-2 px-4 rounded-2xl w-full ${exists ? "border-4 border-red-500" : ""}`} placeholder={"Username"} value={text} onChange={(e) => setText(e.target.value)}/>
                 {!exists && <button type={"submit"} className={"rounded-2xl border border-white py-2 px-4"}>Join</button>}
 
             </form>
