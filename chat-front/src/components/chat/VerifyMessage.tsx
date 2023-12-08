@@ -1,15 +1,13 @@
-import {IMessage} from "@/components/chat/Message";
 import React, {useState} from "react";
 
 interface Props {
     message: string;
-    language: string;
     className: string;
 }
 
 const sleep = (ms: any) => new Promise((r) => setTimeout(r, ms));
 
-const TranslateMessage = ({ message, language, className }: Props) => {
+const VerifyMessage = ({ message, className }: Props) => {
 
     const [prediction, setPrediction] = useState([]);
     const [predictionStatus, setPredictionStatus] = useState("");
@@ -25,7 +23,7 @@ const TranslateMessage = ({ message, language, className }: Props) => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                prompt: `translate this in ${language} : ${message}`,
+                prompt: `Verify if this statement is correct and if not explain why, if it is a question, answer it : ${message}`,
             }),
         });
 
@@ -57,27 +55,27 @@ const TranslateMessage = ({ message, language, className }: Props) => {
         }
 
         setPredictionStatus("succeeded");
+        setPrediction(prediction.response.output);
     }
 
     return (
         <>
-            {language !== "" &&
-                <form onSubmit={handleSubmit} className={`mt-1 text-sm text-blue-500 ${className}`}>
-                    <button type={"submit"}>Translate</button>
-                </form>
-            }
-            <div>
-                {error && <p className={"text-red-500"}>An error has occured during the translation : {error}</p>}
+            <form onSubmit={handleSubmit} className={`mt-1 text-sm text-blue-500 ${className}`}>
+                <button type={"submit"}>Verify</button>
+            </form>
+
+            <div className={""}>
+                {error && <p className={"text-red-500"}>An error has occured during the verification : {error}</p>}
 
                 {predictionStatus === "succeeded" && (
                     <p>
-                        Translation : {prediction.join("")}
+                        Verification : {prediction.join("")}
                     </p>
                 )}
 
                 {predictionStatus === "pending" && error === null && (
                     <p>
-                        Translation : pending...
+                        Verification : pending...
                     </p>
                 )}
             </div>
@@ -85,4 +83,4 @@ const TranslateMessage = ({ message, language, className }: Props) => {
     )
 }
 
-export default TranslateMessage;
+export default VerifyMessage;
